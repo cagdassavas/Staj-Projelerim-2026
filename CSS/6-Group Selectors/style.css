@@ -1,0 +1,45 @@
+/* * {
+border: 1px solid blue;   * tüm etiketler seçilir 
+} */
+
+/* p{
+    border: 1px solid blue; tüm p seçildi
+} */
+
+/* div p{
+    border: 1px solid blue;
+} */
+
+
+/* .container div {
+  border: 1px solid blue;
+}   */
+
+/* .container div.box {
+  border: 1px solid blue;
+}  
+
+div p {
+    border: 1px solid red;
+} */
+
+
+/* div,p{
+    border: 1px solid blue;
+} */
+
+/* div.box,p{
+    border: 1px solid blue;
+} */
+
+/* div>p{
+    border: 1px solid pink;
+} */
+
+/* p~div{
+    border: 1px solid red;
+} */
+
+/* p+div{
+    border: 1px solid purple;
+} */

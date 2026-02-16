@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--! Tailwind Css CDN -->
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Document</title>
+</head>
+<body class="bg-gray-200">
+<h1 class="text-5xl my-1 text-center text-pink-500">Yaplacaklar Listesi</h1>
+ <div class="container mx-auto w-1/2">
+    <form>
+        <div class="border flex">
+            <input type="text"
+            placeholder="Birşeyler yazınız..."
+             class="w-full p-2 relative z-90"
+              id="todo-input">
+            <button id="tadd-todo"type="button" class="border-1 px-3 bg-pink-600 text-white hover:bg-yellow-600 transition">Ekle</button>
+        </div>
+    </form>
+
+   <div class="flex justify-end border p-3">
+<button onclick="clearTodos()" type="button" class="px-2 py-2 mt-2 bg-purple-500 text-white hover:bg-red-600 hover:bg-yellow-600 transition">
+    Temizle
+</button>
+   </div>
+
+   <ul class="flex flex-col gap-y-4 border p-3 bg-pink-100" id="todos">
+
+    <!-- <li class="flex items-center justify-between border px-4 py-3">
+        <span>Todo Name</span>
+        <button class="text-pink-400">Sil</button>
+    </li> -->
+   </ul>
+ </div>  
+ <script>
+    // 1. Elementleri Seçiyoruz
+    const textInputDOM = document.getElementById("todo-input");
+    const btnAddTodoDOM = document.getElementById("tadd-todo");
+    const todoDOM = document.querySelector("#todos"); // Listelenen yer
+
+    let todos = []; // Depomuz
+
+    // 2. Ekleme İşlemi
+    btnAddTodoDOM.addEventListener("click", addTodo);
+
+    function addTodo(e) {
+        e.preventDefault();
+        
+        if (textInputDOM.value === "") {
+            alert("Lütfen bir görev yazın!");
+            return;
+        }
+
+        todos.unshift({ 
+            id: todos.length + 1, 
+            todoTitle: textInputDOM.value 
+        });
+
+        textInputDOM.value = ""; 
+        displayTodos(); 
+    }
+
+    // 3. Listeleme İşlemi
+    function displayTodos() {
+        let result = "";
+
+        if (todos.length === 0) {
+            todoDOM.innerHTML = "Liste Boş!!";
+        } else {
+            todos.forEach((item) => {
+                result += `
+                <li class="flex items-center justify-between border px-4 py-3 font-bold">
+                    <span>${item.todoTitle}</span>
+                    <button class="text-pink-400" onclick="deleteTodo(${item.id})">Sil</button>
+                </li>
+                `;
+            });
+            todoDOM.innerHTML = result;
+        }
+    } // <-- İŞTE BU PARANTEZİ UNUTTUĞUN İÇİN ÇALIŞMIYORDU!
+
+    // 4. Tek Silme İşlemi
+    function deleteTodo(id) {
+        let deletedIndex = todos.findIndex((item) => item.id == id);
+        if (deletedIndex !== -1) {
+            todos.splice(deletedIndex, 1);
+            displayTodos();
+        }
+    }
+
+    // 5. Hepsini Temizleme İşlemi
+    function clearTodos() {
+        todos = []; // Listeyi boşalt
+        displayTodos(); // Ekranı güncelle
+    }
+
+    // 6. Sayfa açılınca listeyi göster
+    displayTodos();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
